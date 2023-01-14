@@ -182,6 +182,12 @@ function Calculator() {
 
                   <tbody>
                     <TableRow
+                      freq="Daily"
+                      gross={Math.round(grossWeek / 7).toLocaleString()}
+                      tax={Math.round((grossWeek / 7) * tax).toLocaleString()}
+                      net={Math.round((grossWeek / 7) * (1 - tax)).toLocaleString()}
+                    />
+                    <TableRow
                       freq="Weekly"
                       gross={Math.round(grossWeek).toLocaleString()}
                       tax={Math.round(grossWeek * tax).toLocaleString()}
@@ -198,6 +204,18 @@ function Calculator() {
                       gross={Math.round(grossWeek * 4).toLocaleString()}
                       tax={Math.round(grossWeek * 4 * tax).toLocaleString()}
                       net={Math.round(grossWeek * 4 * (1 - tax)).toLocaleString()}
+                    />
+                    <TableRow
+                      freq="Quarterly"
+                      gross={Math.round(grossWeek * 4 * 3).toLocaleString()}
+                      tax={Math.round(grossWeek * 4 * 3 * tax).toLocaleString()}
+                      net={Math.round(grossWeek * 4 * 3 * (1 - tax)).toLocaleString()}
+                    />
+                    <TableRow
+                      freq="Half-Yearly"
+                      gross={Math.round(grossWeek * 4 * 6).toLocaleString()}
+                      tax={Math.round(grossWeek * 4 * 6 * tax).toLocaleString()}
+                      net={Math.round(grossWeek * 4 * 6 * (1 - tax)).toLocaleString()}
                     />
                     <TableRow
                       freq="Annually"
