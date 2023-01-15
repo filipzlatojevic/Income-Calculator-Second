@@ -15,6 +15,7 @@ function Calculator() {
   const [inputValue, setInputValue] = useState('');
   const [grossWeek, setGrossWeek] = useState(0);
   const [disabledBtn, setDisabledBtn] = useState(false);
+  const [focused, setFocused] = useState(false);
   const tax = 0.15;
 
   useEffect(() => {
@@ -70,13 +71,7 @@ function Calculator() {
         <section className="bg-[#0000004d] border-[2px] border-btnGreen px-[20px] gap-[20px] flex flex-col justify-start items-start z-10 max-w-[900px] w-full min-h-[500px] shadow-[0_0_25px_0_rgba(0,0,0,0.30)] rounded-b-md rounded-tr-md">
           <div className="w-full pt-[20px] flex flex-wrap gap-[10px] items-center justify-between">
             <div className="flex items-center text-white justify-start gap-[10px] text-[22px]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
-                fill="currentColor"
-                class="bi bi-calculator"
-                viewBox="0 0 16 16">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
                 {' '}
                 <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z" />{' '}
                 <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z" />{' '}
@@ -102,18 +97,22 @@ function Calculator() {
                 What is your total income?
               </label>
 
-              <div className="relative mt-[10px] rounded-md shadow-sm">
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <span className="text-gray-500 sm:text-sm">$</span>
-                </div>
-                <Input value={inputValue} onChange={e => setInputValue(e.target.value)} />
+              <div>
+                <div className="relative mt-[10px] rounded-md shadow-sm">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                    <span className="text-gray-500 sm:text-sm">$</span>
+                  </div>
+                  <Input onBlur={() => setFocused(true)} value={inputValue} onChange={e => setInputValue(e.target.value)} />
 
-                <div className="absolute inset-y-0 right-0 flex items-center">
-                  <Select value={selectedOption} onChange={e => setSelectedOption(e.target.value)} />
+                  <div className="absolute inset-y-0 right-0 flex items-center">
+                    <Select value={selectedOption} onChange={e => setSelectedOption(e.target.value)} />
+                  </div>
                 </div>
+                <span className={`${!inputValue && focused ? 'visible' : 'invisible'} text-red-500 text-[15px]`}>
+                  Please, enter your income.
+                </span>
               </div>
-
-              <div className="text-[18px]  mt-[20px] font-normal text-white">Please choose the income type</div>
+              <div className="text-[18px]  mt-[10px] font-normal text-white">Please choose the income type</div>
               <div className="w-full flex min-[450px]:flex-row flex-col gap-[10px] mt-[10px]">
                 <Button
                   moreClass={`flex-1 whitespace-nowrap text-white border-gray-300 hover:border-btnGreen ${

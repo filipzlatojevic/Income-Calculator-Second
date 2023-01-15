@@ -1,7 +1,8 @@
 import React from 'react';
 
-const Input = ({ value, onChange }) => (
+const Input = ({ value, onChange, onBlur }) => (
   <input
+    onBlur={onBlur}
     type="number"
     name="income"
     id="income"
