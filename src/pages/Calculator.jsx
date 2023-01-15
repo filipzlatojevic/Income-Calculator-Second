@@ -183,9 +183,9 @@ function Calculator() {
                   <tbody>
                     <TableRow
                       freq="Daily"
-                      gross={Math.round(grossWeek / 7).toLocaleString()}
-                      tax={Math.round((grossWeek / 7) * tax).toLocaleString()}
-                      net={Math.round((grossWeek / 7) * (1 - tax)).toLocaleString()}
+                      gross={(grossWeek / 7).toFixed(2).toLocaleString()}
+                      tax={((grossWeek / 7) * tax).toFixed(2).toLocaleString()}
+                      net={((grossWeek / 7) * (1 - tax)).toFixed(2).toLocaleString()}
                     />
                     <TableRow
                       freq="Weekly"
